@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Ajouter une addresse - La Boutique {% endblock %}
+
+{% block content %}
+
+    <h1> Gerer mes adresses </h1>
+
+    <a href="{{ path('account_address') }}"> Retour </a>
+    <hr>    
+
+    {{ form_start(formAddress) }}
+    <div class="row">
+        <div class="col-md-12"> {{ form_row(formAddress.name) }} </div>
+        <div class="col-md-6"> {{ form_row(formAddress.firstname) }} </div>
+        <div class="col-md-6"> {{ form_row(formAddress.lastname) }} </div>
+        <div class="col-md-6"> {{ form_row(formAddress.company) }} </div>
+        <div class="col-md-6"> {{ form_row(formAddress.address) }} </div>
+        <div class="col-md-6"> {{ form_row(formAddress.postal) }} </div>
+        <div class="col-md-6"> {{ form_row(formAddress.city) }} </div>
+        <div class="col-md-6"> {{ form_row(formAddress.country) }} </div>
+        <div class="col-md-6"> {{ form_row(formAddress.phone) }} </div>
+    </div>
+
+    {{ form_end(formAddress) }}
+
+{% endblock %}

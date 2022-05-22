@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} la boutique {% endblock %}
+
+{% block content %}
+
+    <h1> Mon compte </h1>
+    Bienvenu {{app.user.firstname}}  dans votre compte. 
+    c'est ton espace mec !!
+
+    <hr>
+
+    <a href="{{ path('account_password') }}"> Modifier mon mot de passe </a><br/> 
+    <a href="{{ path('account_address') }}"> Gerer mes adresses </a><br/>
+    <a href="{{ path('account_order') }}"> Mes commandes </a><br/>
+
+
+{% endblock %}
