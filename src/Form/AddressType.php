@@ -23,13 +23,13 @@ class AddressType extends AbstractType
                 ]
             ])
             ->add('firstname', TextType::class, [
-                'label' => 'Votre prénom',
+                'label' => 'Votre prénom de facturation',
                 'attr' => [
                     'placeholder' => 'Entrez votre prénom'
                 ]
             ])
             ->add('lastname', TextType::class, [
-                'label' => 'Votre nom',
+                'label' => 'Votre nom de facturation',
                 'attr' => [
                     'placeholder' => 'Entrez votre nom'
                 ]
@@ -42,7 +42,7 @@ class AddressType extends AbstractType
                 ]
             ])
             ->add('address', TextType::class, [
-                'label' => 'votre adresse',
+                'label' => 'votre adresse de livraison',
                 'attr' => [
                     'placeholder' => '8 rue de Marseille...'
                 ]

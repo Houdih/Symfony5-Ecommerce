@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegisterType;
+use App\Service\MailerService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,8 +23,10 @@ class RegisterController extends AbstractController
     /**
      * @Route("/inscription", name="app_register")
      */
-    public function index(Request $request, UserPasswordHasherInterface $encoder): Response
+    public function index(Request $request, UserPasswordHasherInterface $encoder, MailerService $mailer): Response
     {
+        $notif = null;
+
         $user = new User();
         $form = $this->createForm(RegisterType::class, $user);
 
@@ -32,16 +35,29 @@ class RegisterController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $user = $form->getData();
 
-            $password = $encoder->hashPassword($user, $user->getPassword());
+            $search_email = $this->entityManager->getRepository(User::class)->findOneByEmail($user->getEmail());
 
-            $user->setPassword($password);
+            if(!$search_email) {
+                $password = $encoder->hashPassword($user, $user->getPassword());
+                
+                $user->setPassword($password);
+    
+                $this->entityManager->persist($user);
+                $this->entityManager->flush();
+                
+                $content = "Bonjour ". $user->getFirstname() ;
+                $mailer->sendEmail($user->getEmail(), 'La Boutique', $content);
 
-            $this->entityManager->persist($user);
-            $this->entityManager->flush();
+                $notif = "votre inscription s'est correctement déroulée";
+                return $this->redirectToRoute('account');
+            } else {
+                $notif = "L'email que vous avez renseigné existe déjà.";
+            }
         }
 
         return $this->render('register/index.html.twig', [
             'form' => $form->createView(),
+            'notif' => $notif
         ]);
     }
 
