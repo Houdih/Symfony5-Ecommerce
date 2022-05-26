@@ -58,7 +58,7 @@ class OrderController extends AbstractController
             $delivery_content = $delivery->getFirstname().' '.$delivery->getLastname();
 
             if($delivery->getCompany()) {
-                $delivery_content .= '<br/>'.$delivery->getCompany();
+                $delivery_content .= '<br/>'.$delivery->getCompany()->formatValue(function ($value) { return $value; });
             }
 
             $delivery_content .= '<br/>' . $delivery->getAddress();
@@ -73,7 +73,7 @@ class OrderController extends AbstractController
             $order->setCarrierName($carriers->getName());
             $order->setCarrierPrice($carriers->getPrice());
             $order->setDelivery($delivery_content);
-            $order->setIsPaid(0);
+            $order->setState(0);
 
             $this->entityManager->persist($order);
 

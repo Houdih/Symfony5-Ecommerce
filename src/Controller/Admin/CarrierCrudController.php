@@ -20,7 +20,7 @@ class CarrierCrudController extends AbstractCrudController
     {
         return [
             TextField::new('name'),
-            TextEditorField::new('description'),
+            TextEditorField::new('description')->formatValue(function ($value) { return $value; }),
             MoneyField::new('price')->setCurrency('EUR'),
         ];
     }
