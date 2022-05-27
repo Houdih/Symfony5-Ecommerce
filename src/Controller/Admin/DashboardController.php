@@ -23,17 +23,17 @@ class DashboardController extends AbstractDashboardController
      */
     public function index(): Response
     {
-        $routeBuilder = $this->get(AdminUrlGenerator::class);
+        $routeBuilder = $this->container->get(AdminUrlGenerator::class);
 
         return $this->redirect($routeBuilder->setController(OrderCrudController::class)->generateUrl());
         
-        // return parent::index();
     }
 
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('La Boutique');
+            ->setTitle('La Boutique')
+            ->setFaviconPath('home.svg');
     }
 
     public function configureMenuItems(): iterable
