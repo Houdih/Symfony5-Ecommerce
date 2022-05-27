@@ -46,7 +46,7 @@ class RegisterController extends AbstractController
                 $this->entityManager->flush();
                 
                 $content = "Bonjour ". $user->getFirstname() ;
-                $mailer->sendEmail($user->getEmail(), 'La Boutique', $content);
+                $mailer->sendEmail($user->getEmail(), $content, 'La Boutique');
 
                 $notif = "votre inscription s'est correctement déroulée";
                 return $this->redirectToRoute('account');

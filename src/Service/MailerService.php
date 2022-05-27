@@ -14,7 +14,7 @@ class MailerService
         $this->mailer = $mailer;
     }    
 
-    public function sendEmail($to = 'tests.houd@gmail.com', $subject = 'Mon premier mail', $message = "La Boutique"): void
+    public function sendEmail($to = 'tests.houd@gmail.com', $subject = 'Sujet du mail', $content = "Le contenu du mail"): void
     {
         $email = (new Email())
             ->from('tests.houd@example.com')
@@ -25,7 +25,7 @@ class MailerService
             //->priority(Email::PRIORITY_HIGH)
             ->subject($subject)
             ->text('Sending emails is fun again!')
-            ->html($message);
+            ->html($content);
 
             $this->mailer->send($email);
 
