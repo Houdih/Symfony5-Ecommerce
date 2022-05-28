@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Nous contacter - La Boutique{% endblock %}
+
+{% block content %}
+
+    <h2> Nous Contacter </h2>
+    <p> N'hésitez pas à prendre contact avec notre équipe </p>
+    <div>
+        {% for message in app.flashes('notice') %}
+            <div class="alert alert-info"> <h4> {{ message }} </h4> <div/>
+        {% endfor %}
+    </div>
+    <div class="row">
+        <div class="col-md-8"> {{ form(form) }} </div>
+        <div class="col-md-4">
+            <strong> La Boutique </strong>
+            <hr>
+            06 20 54 78 96 <br/>
+            8 rue de Paris, Saint Germain 78100 <br/>
+            contact@laboutique.fr
+        </div>
+    </div>
+
+{% endblock %}
